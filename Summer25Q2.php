@@ -50,11 +50,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $total_screen = (int) ceil($attendees / $seat_capacity);
 
-  $empty_seats =($total_screen * $seat_capacity)-$attendees;
+  $empty_seats = ($total_screen * $seat_capacity) - $attendees;
 
-  $wasted_money=($ticket_price*$empty_seats);
+  $wasted_money = ($ticket_price * $empty_seats);
 
-  
+  echo "<table border='1' cellpadding='10'>";
+  echo
+  "
+        <tr>
+          <td>Total Screen</td>
+          <td>Empty Seats</td>
+          <td>Wasted Money</td>
+        </tr>
+    ";
 
+  echo
+  "
+        <tr>
+          <td>$total_screen</td>
+          <td>$empty_seats</td>
+          <td>$wasted_money</td>
+        </tr>
+    ";
+
+  echo "</table>";
 }
 ?>
