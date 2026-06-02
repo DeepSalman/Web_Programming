@@ -59,6 +59,20 @@ foreach ($categoryRevenue as $category => $total) {
 
 //Question 2 ends here 
 
+//Question 3 Starts here 
+mysqli_query(
+    $connection,
+    "UPDATE sales_data
+     SET Revenue = Revenue * 1.10
+     WHERE Revenue > 70000"
+);
+
+//Question 3 ends here 
+
+
+
+
+
 
 
 
