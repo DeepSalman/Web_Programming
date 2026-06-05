@@ -47,8 +47,18 @@ $sq3 = "UPDATE book_loans
 
 mysqli_query($connection, $sq3);
 
-$sq4 = "SELECT BookTitle, SUM(PenaltyFee) AS TotalPenalty";
-mysqli_query($connection,$sq4);
+$sq4 = "SELECT BookTitle, SUM(PenaltyFee) AS TotalPenalty
+        FROM book_loans
+        GROUP BY BookTitle
+        ORDER BY TotalPenalty DESC";
+
+$result4 = mysqli_query($connection, $sq4);
+
+while ($row = mysqli_fetch_assoc($result4)) {
+
+    echo "Book Title: ".$row['BookTitle'].
+         " | Total Penalty Fee: ".$row['TotalPenalty']."<br>";
+}
 
 
 
