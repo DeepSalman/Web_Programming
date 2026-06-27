@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Calorie Tracker</title>
+</head>
+<body>
+    <h2>Daily Calorie intake </h2>
+    <br>
+    <label>Enter Calories for this meal </label>
+    <input type="number" id="calorieInput">
+    <button onclick="addCalories()">Add Calories</button>
+
+    <p id="totalCalorieslabel">Total calories : 0</p>
+    <p id="goalprogress">Daily Goal Progress :0%</p>
+    <p id="feedback">FeedBack: </p>
+
+
+    <script>
+        var dailygoal = 2000;
+        var totalcalories =0;
+        var entrycount=0;
+
+        function addCalories(){
+            var input = document.getElementById("calorieInput");
+            var calories = Number(input.value);
+
+            if(calories<=0){
+                alert("please enter a valid number");
+                return;
+            }
+            totalcalories +=calories;
+            entrycount++;
+
+            document.getElementById("totalCalorieslabel").innerHTML = "Total Calories : "+totalcalories;
+            document.getElementById("goalprogress").innerHTML = "Daily Goal Progress : "+ totalcalories +"/"+ dailygoal ;
+
+            var feedback = "";
+
+            if(totalcalories>=dailygoal){
+                feedback = "You have reached your daily goal!";
+            }
+            else if(totalcalories>=1601){
+                feedback = "You are close to your daily goal!";
+            }
+            else if(totalcalories>=1201){
+                feedback = "You are halfway to your daily goal!";
+            }
+            else if(totalcalories>=801){
+                feedback = "You are making progress!";
+            }
+            else{
+                feedback = "Keep going!";
+            }
+
+            document.getElementById("feedback").innerHTML = "Feedback: "+feedback;
+            
+
+
+        }
+    </script>
+</body>
+</html>
