@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Guess the Number</title>
+</head>
+<body>
+
+  <h2>Guess the Secret Number (500 - 5000)</h2>
+
+  <label for="guessInput">Enter your guess:</label>
+  <input type="text" id="guessInput">
+  <button onclick="checkGuess()">Submit</button>
+
+  <p id="feedbackLabel">Feedback: Make your first guess!</p>
+  <p id="guessCountLabel">Guesses used: 0 / 5</p>
+
+  <script >
+    // Generate a secret number between 500 and 5000
+var secretNumber = Math.floor(Math.random() * (5000 - 500 + 1)) + 500;
+
+// Track number of guesses and the limit
+var guessCount = 0;
+var maxGuesses = 5;
+
+function checkGuess() {
+
+  var input = document.getElementById("guessInput");
+  var feedbackLabel = document.getElementById("feedbackLabel");
+  var guessCountLabel = document.getElementById("guessCountLabel");
+
+  var guess = Number(input.value);
+
+  // Simple check for valid number input
+  if (input.value === "" || isNaN(guess)) {
+    alert("Please enter a valid number.");
+    return;
+  }
+
+  guessCount = guessCount + 1;
+  guessCountLabel.innerHTML = "Guesses used: " + guessCount + " / " + maxGuesses;
+
+  // Step 3b and 3c: compare guess to secret number
+  if (guess === secretNumber) {
+    feedbackLabel.innerHTML = "Correct! The secret number was " + secretNumber + ".";
+    input.disabled = true;
+    return;
+  } else if (guess > secretNumber) {
+    feedbackLabel.innerHTML = "Too high!";
+  } else {
+    feedbackLabel.innerHTML = "Too low!";
+  }
+
+  // Step 3e: check if the user has run out of guesses
+  if (guessCount >= maxGuesses) {
+    feedbackLabel.innerHTML = "Out of guesses! The secret number was " + secretNumber + ".";
+    input.disabled = true;
+  }
+
+  input.value = "";
+}
+
+
+  </script>
+
+</body>
+</html>
