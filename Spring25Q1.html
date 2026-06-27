@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Password Strength Checker</title>
+</head>
+<body>
+
+  <h2>Password Strength Checker</h2>
+
+  <label for="passwordInput">Enter your password:</label>
+  <input type="password" id="passwordInput">
+  <button onclick="checkStrength()">Check Strength</button>
+
+  <p id="scoreLabel">Score: 0 / 100</p>
+  <p id="feedbackLabel">Feedback: </p>
+  <p id="attemptsLabel">Attempts: 0</p>
+
+  <script>
+    var targetScore = 100;
+    var attempts = 0;
+    function checkStrength(){
+        var input = document.getElementById("passwordInput");
+        var password = input.value;
+        attempts++;
+
+        var lengthscore = 0;
+        if(password.length>=6){
+            lengthscore = Math.floor(password.length/2)*10;
+        }
+
+        var upperscore =0;
+        if(/[A-Z]/.test(password)){
+            upperscore = 20;
+        }
+
+        var lowerscore =0;
+        if(/[a-z]/.test(password)){
+            lowerscore += 10;
+        }
+
+        var numberscore =0;
+        if(/[0-9]/.test(password)){
+            numberscore = 20;
+        }
+
+        var specialscore =0;
+        if (/[^A-Za-z0-9]/.test(password)) {
+            specialscore = 20;
+        }
+
+
+
+
+        var totalScore = lengthscore + upperscore + lowerscore + numberscore + specialscore;
+        if (totalScore > 100) totalScore = 100;
+        var level = "";
+        if (totalScore <= 30) {
+            level = "Very Weak";
+        } else if (totalScore <= 50) {
+            level = "Weak";
+        } else if (totalScore <= 70) {
+            level = "Medium";
+        } else if (totalScore <= 90) {
+            level = "Strong";
+        } else {
+            level = "Very Strong";
+        }
+        var message = level;
+ 
+        // Perfect password check
+        if (totalScore >= targetScore) {
+            message = "Perfect Password! Great job, this password is very secure.";
+        }
+        
+        // Too many attempts without reaching "Strong" or better
+        if (attempts > 8 && totalScore < 71) {
+            message = "Need practice! Try adding uppercase letters, numbers, special characters (!@#$%^&*), and make your password at least 10-12 characters long.";
+        }
+        
+        // Show the results on the page
+        document.getElementById("scoreLabel").innerHTML = "Score: " + totalScore + " / 100";
+        document.getElementById("feedbackLabel").innerHTML = "Feedback: " + message;
+        document.getElementById("attemptsLabel").innerHTML = "Attempts: " + attempts;
+        }
+
+
+  </script>
+
+</body>
+</html>
